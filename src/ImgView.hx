@@ -22,12 +22,16 @@ class ImgView {
   var visScale: Float = 1;
   var panX: Float = 0;
   var panY: Float = 0;
+  var contextMenu: ColorPickerMenu;
 
   public inline function new() {
     this.proj = new Matrix4();
 
     this.canvas = document.createCanvasElement();
+    canvas.className = "imgview";
     document.body.appendChild(this.canvas);
+
+    contextMenu = new ColorPickerMenu(document.body);
 
     canvas.addEventListener('mousedown', onMouseDown);
     canvas.addEventListener('mousemove', onMouseMove);
@@ -92,7 +96,7 @@ void main() {
 
     image = new Image(gl, 15, 15);
 
-    gl.clearColor(0.1, 0.1, 0.1, 1.0);
+    gl.clearColor(0.15, 0.15, 0.15, 1.0);
   }
 
   public inline function resize(width: Int, height: Int) {
@@ -104,6 +108,10 @@ void main() {
   public inline function center() {
     panX = 0.5 * canvas.width;
     panY = 0.5 * canvas.height;
+  }
+
+  public inline function pointInCanvas(): Bool {
+    return false;
   }
 
   public inline function frame(dt: Float) {
@@ -135,10 +143,12 @@ void main() {
   }
 
   function onWheel(event) {
-    final zoom = event.deltaY < 0 ? -0.2 : 0.2;
+    // final zoom = event.deltaY * 0.001;
+    final zoom = event.deltaY < 0 ? -0.15 : 0.15;
+
     scale += zoom;
 
-    scale = scale > 0.2 ? scale : 0.2;
+    scale = scale > 0.05 ? scale : 0.05;
     scale = scale < 4.6 ? scale : 4.6;
   }
 }

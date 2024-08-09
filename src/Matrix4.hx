@@ -17,18 +17,6 @@ abstract Matrix4(Float32Array) {
     this[13] = -(top + bottom) / (top - bottom);
     this[14] = -(far + near) / (far - near);
     this[15] = 1;
-
-    /*final width=right-left;
-    final height=top-bottom;
-    final depth=far-near;
-
-    this[0]=2/width;
-    this[5]=2/height;
-    this[10]=2/depth;
-    this[12]=-(right+left)/width;
-    this[13]=-(top+bottom)/height;
-    this[14]=-(far+near)/depth;
-    this[15]=1;*/
   }
 }
 

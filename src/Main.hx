@@ -17,7 +17,7 @@ class Main {
       imgView.resize(document.defaultView.innerWidth, document.defaultView.innerHeight);
       imgView.center();
 
-      sideBar = new SideBar();
+      sideBar = new SideBar(document.body);
 
       document.defaultView.requestAnimationFrame(frame);
     });

@@ -1,9 +1,10 @@
 body {
   padding: 0px;
   margin: 0px;
+  overflow: hidden;
 }
 
-canvas {
+imgview {
   position: absolute;
   left: 0px;
   top: 0px;
@@ -14,19 +15,44 @@ button {
   width: 80px;
   height: 80px;
   text-align: center;
-  margin-top: 12px;
+  margin-top: 10px;
 
-  border-radius: 6px;
-  background-color: #1a1a1a;
-  box-shadow: 0px 0px 8px #1a1a1a;
+  background-color: #1e1e1e;
+  box-shadow: 0px 0px 6px #000;
 
-  border-color: #e0e0c0;
   border-width: 0px;
-  border-style: solid;
 
-  color: #e0e0c0;
+  color: #f0f0e0;
 
   font-size: 25px;
+
+  transition: 100ms ease-out;
+}
+
+button:hover {
+  color: #fefeee;
+  background-color: #2e2e2e;
+}
+
+.active-button {
+  color: #2e2e2e !important;
+  background-color: #fefeee !important;
+}
+
+.context-menu {
+  position: absolute;
+  background-color: #0a0a0a;
+  z-index: 10 !important;
+  box-shadow: 0px 0px 16px #000;
+  padding: 12px;
+}
+
+.hide {
+  display: none;
+}
+
+.color-picker {
+  box-shadow: 0px 0px 10px #000;
 }
 
 #sidebarcontainer {
@@ -36,9 +62,9 @@ button {
   width: 100px;
   height: 100%;
   background-color: #0a0a0a;
-  box-shadow: 0px 0px 32px #040404;
+  box-shadow: 0px 0px 32px #000;
   z-index: 1;
-  color: #e0e0c0;
+  color: #f0f0e0;
   padding-top: 0px;
 }
 
