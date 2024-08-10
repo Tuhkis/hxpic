@@ -18,6 +18,7 @@ class ImgView {
   var shaders: Program;
   var image: Image;
   var isDragging: Bool = false;
+  var isDrawing: Bool = false;
   var scale: Float = 1;
   var visScale: Float = 1;
   var panX: Float = 0;
@@ -94,7 +95,7 @@ void main() {
 
     uproj = gl.getUniformLocation(shaders, "uproj");
 
-    image = new Image(gl, 15, 15);
+    image = new Image(gl, 8, 8);
 
     gl.clearColor(0.15, 0.15, 0.15, 1.0);
   }
@@ -129,16 +130,45 @@ void main() {
 
   function onMouseDown(event) {
     isDragging = event.buttons == 4;
+
+    if (event.buttons == 1) {
+      if (
+        (event.clientX > (-250 / visScale + panX)) &&
+        (event.clientX < (250 / visScale + panX)) &&
+
+        (event.clientY > (-250 / visScale + panY)) &&
+        (event.clientY < (250 / visScale + panY))
+      ) {
+        image.setPixel(
+          cast Math.floor((event.clientX - (-250 / visScale + panX)) / (500 / visScale) * image.width),
+          cast Math.floor((event.clientY - (-250 / visScale + panY)) / (500 / visScale) * image.height),
+          255, 255, 0
+        );
+        image.updateTexture(gl);
+        isDrawing = true;
+      }
+    }
   }
 
   function onMouseUp(event) {
     isDragging = event.buttons == 4;
+    if (event.buttons == 0) {
+      isDrawing = false;
+    }
   }
 
   function onMouseMove(event) {
     if (isDragging) {
       panX += event.movementX;
       panY += event.movementY;
+    }
+    if (isDrawing) {
+      image.setPixel(
+        cast Math.floor((event.clientX - (-250 / visScale + panX)) / (500 / visScale) * image.width),
+        cast Math.floor((event.clientY - (-250 / visScale + panY)) / (500 / visScale) * image.height),
+        255, 255, 0
+      );
+      image.updateTexture(gl);
     }
   }
 

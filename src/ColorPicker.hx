@@ -8,8 +8,8 @@ import js.html.CanvasElement;
 class ColorPicker {
   var g: CanvasRenderingContext2D;
   var canvas: CanvasElement;
-  var choiceX: Int = 0;
-  var choiceY: Int = 0;
+  var choiceX: Int = 125;
+  var choiceY: Int = 125;
   var mouseDown: Bool = false;
 
   public inline function new(parent: Element) {
